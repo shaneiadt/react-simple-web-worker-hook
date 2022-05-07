@@ -2,11 +2,20 @@ import { useState } from "react";
 
 import WorkerBuilder from "./worker-builder";
 
-const useWorker = (worker) => {
+const fn = ({ func, resultName }) => {
+  const entire = func.toString();
+  const body = entire.slice(entire.indexOf("{") + 1, entire.lastIndexOf("}"));
+
+  if (!resultName) return `() => {self.onmessage = (e) => {${body};}}`;
+
+  return `() => {self.onmessage = (e) => {${body};postMessage(${resultName});}}`;
+};
+
+const useWorker = (func) => {
   const [result, setResult] = useState(null);
   const [status, setStatus] = useState("OK");
 
-  const instance = new WorkerBuilder(worker);
+  const instance = new WorkerBuilder(fn({ func }));
 
   instance.onmessage = ({ data }) => {
     setStatus("OK");

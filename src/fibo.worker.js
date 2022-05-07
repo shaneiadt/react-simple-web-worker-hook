@@ -1,8 +1,5 @@
-// eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
-  // eslint-disable-next-line no-restricted-globals
   self.onmessage = (e) => {
-    // Simulate some processing!!
     setTimeout(() => {
       const nbr = e.data;
       var n1 = 0;
