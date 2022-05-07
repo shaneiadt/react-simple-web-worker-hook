@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Web worker in React</p>
+        <h2>Simple Web Worker React Hook</h2>
         <p>Result: {result}</p>
         <p>Status: {status}</p>
         <button onClick={() => postMessage(55)}>Send Message</button>
